@@ -1,17 +1,56 @@
 version: '3.8'
+networks:
+  django:
+    driver: bridge
 services:
-  db:
+  postgres:
     image: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: masterkey
       POSTGRES_DB: "ship_cms_db"
     ports:
-      - "5222:5432"
+      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     restart: always
+
+    networks:
+      - django
+
+  migrations:
+     build:
+       dockerfile: Dockerfile
+       context: .
+     depends_on:
+       postgres:
+         condition: service_healthy
+     command: >
+       sh -c "python manage.py migrate"
+     networks:
+       - django
+
+     
+
+
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    networks:
+      - django
 
 volumes:
   db_data:

@@ -81,7 +81,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'masterkey',
         'HOST': 'localhost',
-        'PORT': '5222',
+        'PORT': '5432',
     }
 }
 # Password validation
