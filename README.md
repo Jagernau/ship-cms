@@ -10,13 +10,9 @@
 2. Установить docker на Ubuntu: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 3. Установить docker-compose: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
 
-## Запуск бд Postgres в докере
-База собранна в коробочке.
-1. Заходим в папку ship-cms `cd ship-cms`
-2. Используем команду `docker-compose up -d` либо `sudo docker-compose up -d` для запуска бд. Всё про контейнер прописанно в файле `docker-compose.yml`
-3. Вуаля Бд на 5222 вроде порту
+### Зайти в папку `cd ship-cms`
 
-## Жесть щас  будет (запускаем проект) вручную
+## Жесть щас  будет (запускаем проект) вручную(это не надо, читать заголовок ниже)
 Так как времени писать контейнер под приложение нет. Будем запускать в ручную
 1. Нужен Python >= 3.10
 2. Нужен pip
